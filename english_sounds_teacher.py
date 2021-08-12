@@ -6,6 +6,8 @@ import random
 
 MAX_X = 1920
 MAX_Y = 1080
+# MAX_X = 1800
+# MAX_Y = 800
 mismatch = 0
 match = 1
 text = 'show_bed_boy'
@@ -22,6 +24,7 @@ group2 = 'bed_teacher_bird_door_cure_boy_show'
 group3 = 'cat_up_far_on_hair_my_cow'
 allsound = 'bed_bird_boat_boy_car_cat_cheese_cow_cure_dog_door_far_fly_go_good_hair_hat_here_june_love_man_my_now_on_pea_red_see_shall_sheep_ship_shoot_show_singer_tea_teacher_television_think_this_up_video_wait_wet_yes_zoo_'
 text = j
+mp3_sounds = ["mp3_sounds_chart", "mp3_sounds_alex", "mp3_sounds_f1", "mp3_sounds_f2"]
 bg_color = (100, 100, 100)
 pygame.init()
 screen = pygame.display.set_mode((MAX_X, MAX_Y))
@@ -59,7 +62,11 @@ while True:
     x_magic, y_magic = show_img(sound)
     pygame.display.flip()
     while (next_sound == False):
-        pygame.mixer.music.load("mp3.sounds.chart/" + sound + ".mp3")
+        dir = random.choice(mp3_sounds)
+        pygame.mixer.music.load(dir + "/" + sound + ".mp3")
+        soundlevel = random.uniform(0.1, 1.0)
+        pygame.mixer.music.set_volume(soundlevel)
+        print(soundlevel)
         pygame.mixer.music.play()
         #    time.sleep(10)
         while (next_sound == False):
