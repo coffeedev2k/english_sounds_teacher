@@ -6,10 +6,13 @@ import random
 
 MAX_X = 1920
 MAX_Y = 1080
-# MAX_X = 1800
-# MAX_Y = 800
+
 mismatch = 0
 match = 1
+number_of_sounds = 1
+sounds = []
+xx_magic = []
+yy_magic = []
 text = 'show_bed_boy'
 u = 'good_shoot_cure'
 p = 'pea_boat_car_tea_dog'
@@ -22,20 +25,26 @@ diphthongs = 'here_wait_cure_boy_show_hair_my_cow'
 group1 = 'sheep_ship_good_shoot_here_wait'
 group2 = 'bed_teacher_bird_door_cure_boy_show'
 group3 = 'cat_up_far_on_hair_my_cow'
+all = ['cat_up_far_on_hair_my_cow', 'bed_teacher_bird_door_cure_boy_show']
 allsound = 'bed_bird_boat_boy_car_cat_cheese_cow_cure_dog_door_far_fly_go_good_hair_hat_here_june_love_man_my_now_on_pea_red_see_shall_sheep_ship_shoot_show_singer_tea_teacher_television_think_this_up_video_wait_wet_yes_zoo_'
-text = j
-mp3_sounds = ["mp3_sounds_chart", "mp3_sounds_alex", "mp3_sounds_f1", "mp3_sounds_f2"]
+text = all[0]
+mp3_dirs = ["mp3_sounds_chart", "mp3_sounds_alex", "mp3_sounds_f1", "mp3_sounds_f2"]
 bg_color = (100, 100, 100)
+textlookfor = r"[a-z]+"
+textlist = re.findall(textlookfor, text)
+# MAX_X = 150*len(textlist)
+# MAX_Y = MAX_X
 pygame.init()
 screen = pygame.display.set_mode((MAX_X, MAX_Y))
 pygame.font.init()  # you have to call this at the start,# if you want to use this module.
 myfont = pygame.font.SysFont('Helvetica', 40)
-textlookfor = r"[a-z]+"
-textlist = re.findall(textlookfor, text)
 
-def show_img(sound):
+
+def show_img(sounds):
+    xx = []
+    yy = []
     tmp_mass = textlist.copy()
-    tmp_mass.remove(sound)
+    tmp_mass = list(set(tmp_mass) - set(sounds))
     for i in range(0, len(tmp_mass)):
         x = random.randint(0, MAX_X-120)
         y = random.randint(0, MAX_Y-120)
@@ -44,59 +53,79 @@ def show_img(sound):
         print(rand)
         img = pygame.image.load("png.pictures.chart/" + rand + ".png")
         screen.blit(img, (x, y))
-    img_magic = pygame.image.load("png.pictures.chart/" + sound + ".png")
-    x = random.randint(0, MAX_X - 120)
-    y = random.randint(0, MAX_Y - 120)
-    screen.blit(img_magic, (x, y))
-    return x, y
+    for i in sounds:
+        img_magic = pygame.image.load("png.pictures.chart/" + i + ".png")
+        x = random.randint(0, MAX_X - 120)
+        y = random.randint(0, MAX_Y - 120)
+        xx.append(x)
+        yy.append(y)
+        screen.blit(img_magic, (x, y))
+
+    return xx, yy
 
 while True:
+    dir = random.choice(mp3_dirs)
     #matchsurface = myfont.render(str(match/(match + mismatch)), False, (100, 100, 100))
-    sound = random.choice(textlist)
+    textlist1 = textlist[:]
+    for i in range(0, number_of_sounds):
+        sound = random.choice(textlist1)
+        textlist1.remove(sound)
+        sounds.append(sound)
+    print(sounds)
     next_sound = False
-    wait = 0
+    wait = 81
     screen.fill(bg_color)
-    bgimg = pygame.image.load("jpg.articulation.gimp/" + sound + ".jpg")
-    screen.blit(bgimg, (0, 0))
+    #bgimg = pygame.image.load("jpg.articulation.gimp/" + sound + ".jpg")
+    #screen.blit(bgimg, (0, 0))
     #screen.blit(matchsurface, (0, 0))
-    x_magic, y_magic = show_img(sound)
+    #2зименить функцию
+    xx_magic, yy_magic = show_img(sounds)
     pygame.display.flip()
     while (next_sound == False):
-        dir = random.choice(mp3_sounds)
-        pygame.mixer.music.load(dir + "/" + sound + ".mp3")
-        soundlevel = random.uniform(0.1, 1.0)
-        pygame.mixer.music.set_volume(soundlevel)
-        print(soundlevel)
-        pygame.mixer.music.play()
-        #    time.sleep(10)
-        while (next_sound == False):
-            time.sleep(0.1)
-
-            ###add repeat
-            wait = wait + 1
-            if wait > 50:
+        time.sleep(0.1)
+        wait = wait + 1
+        if wait > 50:
+            for i_sound in sounds:
+                print("wait is")
+                print(wait)
+                print("i_sound is")
+                print(i_sound)
+                #pygame.mixer.music.load(mp3_dirs[3] + "/" + i_sound + ".mp3")
+                pygame.mixer.music.load(dir + "/" + i_sound + ".mp3")
+                #soundlevel = random.uniform(0.1, 1.0)
+                #pygame.mixer.music.set_volume(soundlevel)
+                #print(soundlevel)
                 pygame.mixer.music.play()
-                wait = 0
-                ###
-            for event in pygame.event.get():
-                if (event.type == pygame.KEYDOWN):
-                    if (event.key == pygame.K_ESCAPE):
-                        sys.exit()
-                if (event.type == pygame.MOUSEBUTTONDOWN):
-                    Mouse_x, Mouse_y = pygame.mouse.get_pos()
-                    if (Mouse_x > x_magic and Mouse_x < x_magic + 120 and Mouse_y > y_magic and Mouse_y < y_magic + 120):
-                        match = match + 1
+                #pygame.event.wait()
+                time.sleep(0.5)
+                print("sounds are")
+                print(sounds)
+            wait = 0
+        for event in pygame.event.get():
+            if (event.type == pygame.KEYDOWN):
+                if (event.key == pygame.K_ESCAPE):
+                    sys.exit()
+            if (event.type == pygame.MOUSEBUTTONDOWN):
+                Mouse_x, Mouse_y = pygame.mouse.get_pos()
+                if (Mouse_x > xx_magic[0] and Mouse_x < xx_magic[0] + 120 and Mouse_y > yy_magic[0] and Mouse_y < yy_magic[0] + 120):
+                    match = match + 1
+                    print(sounds)
+                    print("you are right!")
+                    # pygame.mixer.music.load("mp3.words.chart/" + sounds[0] + ".mp3")
+                    # pygame.mixer.music.play()
+                    #pygame.mixer.music.load("mp3.sounds.chart/" + sound + ".mp3")
+                    #pygame.mixer.music.play()
+                    #time.sleep(0.1)
+                    pygame.mixer.music.load("mp3.words.chart/yes.mp3")
+                    pygame.mixer.music.play()
+                    time.sleep(0.4)
+                    #pygame.mixer.music.load("wav.words.robot/" + sound + ".wav")
+                    #pygame.mixer.music.play()
+                    #time.sleep(1)
+                    sounds.remove(sounds[0])
+                    xx_magic.remove(xx_magic[0])
+                    yy_magic.remove(yy_magic[0])
+                    if len(sounds) == 0:
                         next_sound = True
-                        print("you are right!")
-                        pygame.mixer.music.load("mp3.words.chart/" + sound + ".mp3")
-                        pygame.mixer.music.play()
-                        time.sleep(1)
-                        #pygame.mixer.music.load("mp3.sounds.chart/" + sound + ".mp3")
-                        #pygame.mixer.music.play()
-                        #time.sleep(1)
-
-                        #pygame.mixer.music.load("wav.words.robot/" + sound + ".wav")
-                        #pygame.mixer.music.play()
-                        #time.sleep(1)
-                    else:
-                        mismatch = mismatch + 1
+                else:
+                    mismatch = mismatch + 1
