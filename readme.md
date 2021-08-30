@@ -1,0 +1,11 @@
+Программа - тренажер для освоения звуков английского языка.
+Вы выставляете настройки в файле config.ini и запускаете тренажер, после чего вам нужно будет расслышать звуки, узнать их и кликнуть по ним на экране в правильном порядке. Чтобы выйти из программы, нажмите ESC. Программа запоминает прогресс при выходе, если хотите вернуться в начало, удалите файл progress.ini.
+В файле config.ini вы также можете выставить группы звуков которые хотите натренировать, размер холста программы, количество звуков за раз на старте, количество звуков подряд максимальное, количество звуков подряд, которое нужно угадать до перехода на новую группу, каталоги с файлами звуков.
+В программе изначально два режима - первый - по умолчанию - квиз - для его старта просто запустите программу. Второй режим - рекомендуемый мной - режим тренировки. Переименуйте файл config.ini в config_quiz.ini например, а config_training.ini в config.ini, удалите файл progress.ini если он есть и запустите программу. Она будет тренировать вас в угадывании гораздо более настойчиво. Для дополнительных возможностей загляните в config.ini и настройте программу по своему вкусу. 
+
+====================================
+
+The program is a simulator for mastering the sounds of the English language.
+You set the settings in the config.ini file and start the simulator, after which you will need to hear the sounds, recognize them and click on them on the screen in the correct order. Press ESC to exit the program. The program remembers the progress on exit, if you want to go back to the beginning, delete the progress.ini file.
+In the config.ini file, you can also set the groups of sounds that you want to train, the size of the program canvas, the number of sounds at a time at the start, the maximum number of sounds in a row, the number of sounds in a row that you need to guess before moving to a new group, directories with sound files.
+The program initially has two modes - the first - by default - quiz - to start it, just run the program. The second mode - the one I recommend - is the workout regimen. Rename the config.ini file to config_quiz.ini for example, and config_training.ini to config.ini, delete the progress.ini file if present and run the program. She will train you to guess much more aggressively. For more options, take a look at config.ini and customize the program to your liking.
