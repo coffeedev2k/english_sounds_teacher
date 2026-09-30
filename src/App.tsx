@@ -43,7 +43,6 @@ export default function App() {
   const [matchedIndices, setMatchedIndices] = useState<number[]>([]);
   const [cardPositions, setCardPositions] = useState<CardPosition[]>([]);
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
-  const [activePlayingSoundId, setActivePlayingSoundId] = useState<string | null>(null);
   const [mistakeSoundId, setMistakeSoundId] = useState<string | null>(null);
   const [successSoundId, setSuccessSoundId] = useState<string | null>(null);
 
@@ -92,16 +91,12 @@ export default function App() {
       if (seq.length === 0) return;
       setIsPlayingAudio(true);
       await audioManager.playSequence(seq, settings.voiceMode, {
-        onSoundStart: (id) => setActivePlayingSoundId(id),
-        onSoundEnd: () => setActivePlayingSoundId(null),
         onComplete: () => {
           setIsPlayingAudio(false);
-          setActivePlayingSoundId(null);
         },
         pauseMs: 450
       });
       setIsPlayingAudio(false);
-      setActivePlayingSoundId(null);
     },
     [settings.voiceMode]
   );
@@ -361,7 +356,6 @@ export default function App() {
           cardStyle={settings.cardStyle}
           currentSequence={currentSequence}
           matchedIndices={matchedIndices}
-          activePlayingSoundId={activePlayingSoundId}
           mistakeSoundId={mistakeSoundId}
           successSoundId={successSoundId}
           onCardClick={handleCardClick}

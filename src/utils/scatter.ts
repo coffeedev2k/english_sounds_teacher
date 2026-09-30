@@ -12,7 +12,7 @@ export function generateScatteredPositions(
   if (count === 0) return [];
 
   const positions: CardPosition[] = [];
-  
+
   // Decide grid cells based on count and aspect ratio to ensure room
   const cols = Math.max(2, Math.ceil(Math.sqrt(count * aspectRatio)));
   const rows = Math.ceil(count / cols);
@@ -43,7 +43,7 @@ export function generateScatteredPositions(
   // Place cards into jittered slots
   for (let i = 0; i < count; i++) {
     const slot = slots[i % slots.length];
-    
+
     // Jitter within the cell (up to 40% margin)
     const jitterX = (Math.random() - 0.5) * (cellWidth * 0.5);
     const jitterY = (Math.random() - 0.5) * (cellHeight * 0.5);

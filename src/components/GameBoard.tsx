@@ -10,7 +10,6 @@ interface GameBoardProps {
   cardStyle: CardStyle;
   currentSequence: string[];
   matchedIndices: number[]; // indices in currentSequence that have been successfully found
-  activePlayingSoundId: string | null;
   mistakeSoundId: string | null;
   successSoundId: string | null;
   onCardClick: (soundId: string) => void;
@@ -24,7 +23,6 @@ export const GameBoard: React.FC<GameBoardProps> = ({
   cardStyle,
   currentSequence,
   matchedIndices,
-  activePlayingSoundId,
   mistakeSoundId,
   successSoundId,
   onCardClick,
@@ -112,7 +110,6 @@ export const GameBoard: React.FC<GameBoardProps> = ({
                 layoutMode="scattered"
                 style={cardStyleObj}
                 isMatchedInSequence={isMatchedInSeq}
-                isPlaying={activePlayingSoundId === sound.id}
                 isMistake={mistakeSoundId === sound.id}
                 isSuccess={successSoundId === sound.id}
                 onClick={() => onCardClick(sound.id)}
@@ -137,7 +134,6 @@ export const GameBoard: React.FC<GameBoardProps> = ({
                   cardStyle={cardStyle}
                   layoutMode="grid"
                   isMatchedInSequence={isMatchedInSeq}
-                  isPlaying={activePlayingSoundId === sound.id}
                   isMistake={mistakeSoundId === sound.id}
                   isSuccess={successSoundId === sound.id}
                   onClick={() => onCardClick(sound.id)}
