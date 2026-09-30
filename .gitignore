@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+
+# Production build
+dist/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Local / OS
+.DS_Store
+Thumbs.db
+*.local
+progress.ini

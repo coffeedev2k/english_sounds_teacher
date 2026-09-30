@@ -1,11 +1,120 @@
-Программа - тренажер для освоения звуков английского языка.
-Вы выставляете настройки в файле config.ini и запускаете тренажер, после чего вам нужно будет расслышать звуки, узнать их и кликнуть по ним на экране в правильном порядке. Чтобы выйти из программы, нажмите ESC. Программа запоминает прогресс при выходе, если хотите вернуться в начало, удалите файл progress.ini.
-В файле config.ini вы также можете выставить группы звуков которые хотите натренировать, размер холста программы, количество звуков за раз на старте, количество звуков подряд максимальное, количество звуков подряд, которое нужно угадать до перехода на новую группу, каталоги с файлами звуков.
-В программе изначально два режима - первый - по умолчанию - квиз - для его старта просто запустите программу. Второй режим - рекомендуемый мной - режим тренировки. Переименуйте файл config.ini в config_quiz.ini например, а config_training.ini в config.ini, удалите файл progress.ini если он есть и запустите программу. Она будет тренировать вас в угадывании гораздо более настойчиво. Для дополнительных возможностей загляните в config.ini и настройте программу по своему вкусу. 
+# English Sounds Teacher (Web / Node + TypeScript)
 
-====================================
+> **Interactive ear-training simulator for mastering the 44 sounds of the English language.**
+> Built with **Node.js, TypeScript, React, and Vite**. Designed to run entirely in the browser as static files deployed to **GitHub Pages**.
 
-The program is a simulator for mastering the sounds of the English language.
-You set the settings in the config.ini file and start the simulator, after which you will need to hear the sounds, recognize them and click on them on the screen in the correct order. Press ESC to exit the program. The program remembers the progress on exit, if you want to go back to the beginning, delete the progress.ini file.
-In the config.ini file, you can also set the groups of sounds that you want to train, the size of the program canvas, the number of sounds at a time at the start, the maximum number of sounds in a row, the number of sounds in a row that you need to guess before moving to a new group, directories with sound files.
-The program initially has two modes - the first - by default - quiz - to start it, just run the program. The second mode - the one I recommend - is the workout regimen. Rename the config.ini file to config_quiz.ini for example, and config_training.ini to config.ini, delete the progress.ini file if present and run the program. She will train you to guess much more aggressively. For more options, take a look at config.ini and customize the program to your liking.
+[English Description](#english) | [Русское описание](#russian)
+
+---
+
+<a name="english"></a>
+## English
+
+### Overview
+
+**English Sounds Teacher** is an interactive ear-training web application designed to help English learners recognize, distinguish, and master the 44 phonemes of the English language (12 monophthongs, 8 diphthongs, and 24 consonants).
+
+In this simulator, you listen to sounds spoken by native English speakers, identify their phonemic representations, and click the corresponding cards on the screen in the correct sequence.
+
+### Key Features
+
+- **Runs 100% in the Browser**: Completely static application. No backend server or database required.
+- **Ready for GitHub Pages**: Relative asset paths (`base: './'`) and automated GitHub Actions workflow included.
+- **4 Real Voice Sets**:
+  - 🎵 *Chart Voice* (Standard phonemic chart pronunciation)
+  - 👨 *Alex* (Male speaker)
+  - 👩 *Female 1*
+  - 👩 *Female 2*
+  - 🔀 *Random Mix* (Picks randomly each round, true to the original Python version)
+- **44 Articulation Diagrams & Mouth Anatomy Map**: Inspect tongue positions, lip shapes, and vocal tract movements for every sound.
+- **Multiple Game Modes**:
+  - **Quiz Mode** (Default 12 progressive groups, threshold 10)
+  - **Training Mode** (Intensive minimal-pairs practice, threshold 30)
+  - **Minimal Pairs Mode** (Focused pairs like /iː/ vs /ɪ/, /θ/ vs /ð/, etc.)
+  - **Full Chart Challenge** (12 pure vowels, 8 diphthongs, 24 consonants)
+  - **Custom Practice** (Pick any subset of sounds to practice)
+- **Non-Overlapping Scattered Canvas & Clean Grid**: Choose between the classic scattered hunting field or a clean responsive grid.
+- **Progress Persistence**: Automatically saves your current level, streak, and statistics to `localStorage`.
+- **Keyboard Shortcuts**:
+  - <kbd>Space</kbd> or <kbd>R</kbd>: Replay current sound sequence
+  - <kbd>Esc</kbd>: Open / Close Settings
+  - <kbd>F</kbd>: Toggle Fullscreen
+  - <kbd>M</kbd>: Mute / Unmute
+
+### Getting Started Locally
+
+#### Prerequisites
+- Node.js (v18 or higher)
+- npm (v9 or higher)
+
+#### Installation & Development
+```bash
+# Install dependencies
+npm install
+
+# Start local development server with hot-reload
+npm run dev
+
+# Build production static bundle
+npm run build
+
+# Preview production build locally
+npm run preview
+```
+
+### GitHub Pages Deployment
+
+The repository includes a ready-to-use GitHub Actions workflow (`.github/workflows/deploy.yml`).
+
+To deploy:
+1. Push your changes to the `main` branch.
+2. Go to **Settings > Pages** in your GitHub repository.
+3. Under **Build and deployment > Source**, select **GitHub Actions**.
+4. GitHub Actions will automatically build and publish your site!
+
+---
+
+<a name="russian"></a>
+## Russian (Русский)
+
+### Описание программы
+
+**English Sounds Teacher** — веб-тренажер для освоения звуков английского языка на слух. Программа переписана с Python/Pygame на современный стек **Node.js + TypeScript + React + Vite** для работы исключительно в браузере в виде статических файлов (GitHub Pages).
+
+Вы слушаете звуки, узнаете их и кликаете по карточкам на экране в правильном порядке. По мере успешных угадываний сложность возрастает (увеличивается количество звуков в цепочке и открываются новые группы).
+
+### Основные возможности
+
+- **Работает полностью в браузере**: Никаких серверов или установок Python. Достаточно открыть ссылку на GitHub Pages.
+- **4 набора голосов**: Chart, Алекс (мужской голос), Female 1, Female 2, а также режим случайного чередования.
+- **Интерактивные карты артикуляции**: Для каждого из 44 звуков доступна схема положения языка, губ и гортани, а также общая анатомическая карта рта.
+- **Режимы обучения**:
+  - **Режим квиза (Quiz Mode)**: 12 сбалансированных групп звуков.
+  - **Режим тренировки (Training Mode)**: Усиленная тренировка на минимальных парах (порог угадываний 30).
+  - **Минимальные пары (Minimal Pairs)**: Точечная отработка схожих звуков (/iː/ и /ɪ/, /s/ и /z/, /w/ и /v/ и др.).
+  - **Полная таблица (Full Chart)**: Монофтонги, дифтонги, согласные.
+  - **Пользовательский режим**: Выбор любых конкретных звуков для отработки.
+- **Два вида раскладки**:
+  - *Хаотичный холст (Scattered Canvas)* — в стиле оригинальной Pygame версии, но с умным алгоритмом против перекрытия карточек.
+  - *Четкая сетка (Clean Grid)* — для удобной игры на смартфонах и планшетах.
+- **Сохранение прогресса**: Сохраняется в `localStorage` браузера (кнопка сброса возвращает к началу, как удаление `progress.ini`).
+- **Горячие клавиши**:
+  - `Space` или `R`: Повторить звучание
+  - `Esc`: Настройки
+  - `F`: Полный экран
+
+### Запуск и сборка
+
+```bash
+# Установка зависимостей
+npm install
+
+# Запуск локального сервера разработки
+npm run dev
+
+# Сборка статических файлов для GitHub Pages
+npm run build
+
+# Локальный предпросмотр сборки
+npm run preview
+```
